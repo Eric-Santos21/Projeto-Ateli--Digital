@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Carrinho - Karla Priscilia Confeitaria</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <header class="client-header">
+            <div class="back-arrow">
+                <a href="#"><i class="fas fa-arrow-left"></i></a>
+            </div>
+            <div class="brand">
+                <h1 class="brand-title">Seu Carrinho</h1>
+            </div>
+            <div class="header-icons">
+                <a href="#"><i class="fas fa-trash"></i></a>
+            </div>
+        </header>
+
+        <main class="page-content">
+            <div class="cart-item">
+                <div class="cart-item-details">
+                    <h4>Bolo de Chocolate (1 kg)</h4>
+                    <p>R$ 110,00</p>
+                </div>
+                <div class="quantity-selector">
+                    <button type="button">-</button>
+                    <span>1</span>
+                    <button type="button">+</button>
+                </div>
+                <span class="cart-item-price">R$ 110,00</span>
+            </div>
+            
+            <div class="cart-item">
+                <div class="cart-item-details">
+                    <h4>Brownie Recheado</h4>
+                    <p>R$ 7.00</p>
+                </div>
+                <div class="quantity-selector">
+                    <button type="button">-</button>
+                    <span>10</span>
+                    <button type="button">+</button>
+                </div>
+                <span class="cart-item-price">R$ 70,00</span>
+            </div>
+
+            <h4 class="section-title">Opções de recebimento</h4>
+            <div class="radio-options">
+                <input type="radio" name="recebimento" id="entrega" checked>
+                <label for="entrega">Entrega</label>
+                
+                <input type="radio" name="recebimento" id="retirada">
+                <label for="retirada">Retirada</label>
+            </div>
+
+            <div class="address-box">
+                <p><strong>Endereço de entrega</strong></p>
+                <p>Rua Antônio Fernandes, 706 Colinas do Sul, 58069-325, João Pessoa/PB</p>
+                <a href="#">+ Adicionar um novo endereço de entrega</a>
+            </div>
+            
+            <div class="schedule-box">
+                <p><strong>Agende</strong></p>
+                <div class="schedule-inputs">
+                    <input type="text" placeholder="DD/MM/AAA">
+                    <input type="text" placeholder="00:00">
+                </div>
+            </div>
+
+            <div class="order-summary">
+                <h4 class="section-title" style="margin-top: 0;">Resumo do pedido</h4>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span>R$ 180.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Taxa de entrega</span>
+                    <span class="free">Grátis</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span>R$ 180,00</span>
+                </div>
+            </div>
+
+            <a href="pagamento.html" class="btn btn-primary" style="margin-top: 1.5rem;">Ir para Pagamento</a>
+        </main>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio - Karla Priscilia Confeitaria</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <h2>Nosso Cardápio</h2>
+            <p>Doces, com amor</p>
+        </div>
+        <div class="cart-icon">
+            <i data-feather="shopping-cart"></i>
+        </div>
+    </header>
+
+    <nav class="filter-nav">
+        <ul>
+            <li><button class="filter-btn active" data-filter="all">All</button></li>
+            <li><button class="filter-btn" data-filter="bolos">Bolos</button></li> <li><button class="filter-btn" data-filter="doces">Doces Finos e Tradicionais</button></li> <li><button class="filter-btn" data-filter="individuais">Doces Individuais</button></li> <li><button class="filter-btn" data-filter="salgados">Salgados</button></li> <li><button class="filter-btn" data-filter="combos">Combos</button></li> </ul>
+    </nav>
+
+    <main class="product-grid">
+
+        <div class="product-card" data-category="bolos">
+            <div class="card-image-container">
+                <div class="card-image" style="background-image: url('https://i.imgur.com/gY5RAn8.png');"> <span class="price-tag">R$ 110,00 - R$ 150,00</span> </div>
+            </div>
+            <div class="card-content">
+                <h3>Bolo Personalizado (1 kg)</h3> <p>Monte o seu bolo personalizado conosco! Escolha cobertura, massa, recheio e o tema da sua festa!</p> <span class="category-tag tag-bolos">Bolos</span> <button class="btn-add-cart">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+
+        <div class="product-card" data-category="doces">
+            <div class="card-image-container">
+                <div class="card-image" style="background-image: url('https://i.imgur.com/8QpgyYc.png');">
+                    <span class="price-tag">R$ 120,00</span> </div>
+            </div>
+            <div class="card-content">
+                <h3>Brigadeiros (100 un.)</h3> <p>100 unidades de brigadeiros simples</p> <span class="category-tag tag-doces">Doces Finos e Tradicionais</span> <button class="btn-add-cart">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+
+        <div class="product-card" data-category="doces">
+            <div class="card-image-container">
+                <div class="card-image" style="background-image: url('https://i.imgur.com/9xS7P1g.png');">
+                    <span class="price-tag">R$ 150,00</span> </div>
+            </div>
+            <div class="card-content">
+                <h3>Brigadeiros Gourmet (100 un.)</h3> <p>100 unidades de brigadeiros gourmet.</p> <span class="category-tag tag-doces">Doces Finos e Tradicionais</span> <button class="btn-add-cart">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+
+        <div class="product-card" data-category="individuais">
+            <div class="card-image-container">
+                <div class="card-image" style="background-image: url('https://i.imgur.com/uC5vYJ1.png');">
+                    <span class="price-tag">R$ 7,00</span> </div>
+            </div>
+            <div class="card-content">
+                <h3>Brownie Recheado</h3> <p>Um delicioso brownie recheado.</p> <span class="category-tag tag-doces">Doces Individuais</span> <button class="btn-add-cart">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+
+        <div class="product-card" data-category="salgados">
+            <div class="card-image-container">
+                <div class="card-image" style="background-image: url('https://i.imgur.com/L1MvV1S.png');">
+                    <span class="price-tag">R$ 110,00</span> </div>
+            </div>
+            <div class="card-content">
+                <h3>Salgados Tradicionais (100 un.)</h3> <p>100 unidades de salgados simples. Coxinhas, pastéis, bolinhas de queijo e muito mais!</p> <span class="category-tag tag-salgados">Salgados</span> <button class="btn-add-cart">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+
+        <div class="product-card" data-category="salgados">
+            <div class="card-image-container">
+                <div class="card-image" style="background-image: url('https://i.imgur.com/W2qQ9K2.png');">
+                    <span class="price-tag">R$ 150,00</span> </div>
+            </div>
+            <div class="card-content">
+                <h3>Salgados Especiais (100 un.)</h3> <p>100 unidades de salgados especiais. Camarão empanado, croquete de carne seca e muito mais!</p> <span class="category-tag tag-salgados">Salgados</span> <button class="btn-add-cart">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+
+        <div class="product-card" data-category="salgados">
+            <div class="card-image-container">
+                <div class="card-image" style="background-image: url('https://i.imgur.com/I7WJ1mO.png');">
+                    <span class="price-tag">R$ 3,50</span> </div>
+            </div>
+            <div class="card-content">
+                <h3>Mini Hambúrguer</h3> <p>Um delicioso mini hambúrguer.</p> <span class="category-tag tag-salgados">Salgados</span> <button class="btn-add-cart">Adicionar ao Carrinho</button>
+            </div>
+        </div>
