@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento - Karla Priscilia Confeitaria</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../static/Style/Style_pagamento.css">
+ 
+</head>
+<body>
+
+   <div class="app-container">
+        <header class="client-header" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; border-bottom: 1px solid #eee;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <img src="{{ url_for('static', filename='Imagens/logo/cake + title logo.png') }}" alt="Logo Karla Priscilia Confeitaria" style="height: 50px;">
+                <div style="display: flex; gap: 8px;">
+                    <a href="#" style="display: flex; align-items: center;">
+                        <img src="{{ url_for('static', filename='Imagens/whatsapp.png') }}" alt="WhatsApp" style="height: 25px;">
+                    </a>
+                    <a href="https://www.instagram.com/confeitariakarlapriscilia/" style="display: flex; align-items: center;">
+                        <img src="{{ url_for('static', filename='Imagens/instagram.png') }}" alt="Instagram" style="height: 25px;">
+                    </a>
+                </div>
+            </div>
+            
+            <div class="header-icons" style="display: flex; align-items: center; gap: 10px;">
+                <a href="{{ url_for('carrinho') }}" style="display: flex; align-items: center; text-decoration: none; color: #333; background-color: #f78f9a27; border: 1px solid rgba(0,0,0,0.1); border-radius: 20px; padding: 8px 15px; font-size: 14px; font-weight: 500; transition: all 0.2s;">
+                    <i class="fas fa-arrow-left" style="margin-right: 5px;"></i> Voltar
+                </a>
+                <a href="{{ url_for('perfil') }}" class="profile-icon" style="color: #333; padding: 8px;">
+                    <i class="fas fa-user"></i>
+                </a>
+                <a href="{{ url_for('carrinho') }}" class="cart-icon" style="position: relative; color: #333; padding: 8px;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count" style="position: absolute; top: 0; right: 0; background-color: #f78f9a; color: white; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">0</span>
+                </a>
+            </div>
+        </header>
+
+        <main class="page-content">
+            <h1 class="page-title">Pagamento</h1>
+            <p class="page-subtitle">Complete o seu pagamento com segurança.</p>
+
+            <div class="order-summary">
+                <h2 class="section-title">Resumo do pedido</h2>
+                {% set ns = namespace(subtotal=0) %}
+                {% for item in cart %}
+                    {% set line_total = item.price * item.qty %}
+                    {% set ns.subtotal = ns.subtotal + line_total %}
+                    <div class="order-item">
+                        <span>{{ item.name }} ({{ item.qty }}x R$ {{ '%.2f'|format(item.price) }})</span>
+                        <span>R$ {{ '%.2f'|format(line_total) }}</span>
+                    </div>
+                {% else %}
+                    <p>Seu carrinho está vazio.</p>
+                {% endfor %}
+                <div class="order-item">
+                    <span>Subtotal</span>
+                    <span>R$ {{ '%.2f'|format(ns.subtotal) }}</span>
+                </div>
+                <div class="order-item">
+                    <span>Entrega</span>
+                    <span>Grátis</span>
+                </div>
+                <div class="order-item order-total">
+                    <span>Total</span>
+                    <span>R$ {{ '%.2f'|format(ns.subtotal) }}</span>
+                </div>
+            </div>
+
+            <div class="payment-methods">
+                <h2 class="section-title">Método de Pagamento</h2>
+                <div class="tabs">
+                    <div class="tab active" data-tab="credito">Cartão de Crédito</div>
+                    <div class="tab" data-tab="debito">Cartão de Débito</div>
+                    <div class="tab" data-tab="pix">PIX</div>
+                    <div class="tab" data-tab="dinheiro">Dinheiro</div>
+                </div>
+
+                <div id="credito" class="tab-content active">
+                    <form id="creditCardForm">
+                        <div class="form-group">
+                            <label for="cardName">Nome do titular do cartão</label>
+                            <input type="text" id="cardName" class="form-control" placeholder="Como está no cartão" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardNumber">Número do cartão</label>
+                            <input type="text" id="cardNumber" class="form-control" placeholder="0000 0000 0000 0000" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardExpiry">Vencimento (MM/AA)</label>
+                                <input type="text" id="cardExpiry" class="form-control" placeholder="MM/AA" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cardCvc">CVC</label>
+                                <input type="text" id="cardCvc" class="form-control" placeholder="000" required>
+                            </div>
+                        </div>
+                    </form>
+                    <button type="button" class="btn btn-primary" id="confirmPayment">Confirmar pagamento</button>
+                </div>
+
+                <div id="debito" class="tab-content">
+                    <form id="debitCardForm">
+                        <div class="form-group">
+                            <label for="debitCardName">Nome do titular do cartão</label>
+                            <input type="text" id="debitCardName" class="form-control" placeholder="Como está no cartão" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="debitCardNumber">Número do cartão</label>
+                            <input type="text" id="debitCardNumber" class="form-control" placeholder="0000 0000 0000 0000" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="debitCardExpiry">Vencimento (MM/AA)</label>
+                                <input type="text" id="debitCardExpiry" class="form-control" placeholder="MM/AA" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="debitCardCvc">CVC</label>
+                                <input type="text" id="debitCardCvc" class="form-control" placeholder="000" required>
+                            </div>
+                        </div>
+                    </form>
+                    <button type="button" class="btn btn-primary" id="confirmDebitPayment">Confirmar pagamento</button>
+                </div>
+
+                <div id="pix" class="tab-content">
+                    <div class="pix-content">
+                        <p>Escaneie o QR code com o aplicativo do seu banco.</p>
+                        <div class="pix-qr">
+                            <i class="fas fa-qrcode" style="font-size: 60px; color: #ccc;"></i>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="confirmPixPayment">Confirmar pagamento</button>
+                </div>
+
+                <div id="dinheiro" class="tab-content">
+                    <div class="form-group">
+                        <label for="troco">Você vai precisar de troco? Caso sim, para quanto?</label>
+                        <input type="text" id="troco" class="form-control" placeholder="Ex: Sim, vou precisar de troco para uma nota de cem...">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="confirmCashPayment">Confirmar pagamento</button>
+                </div>
+            </div>
+        </main>
+            
+        <div class="success-screen">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2 class="success-title">Pagamento efetuado com sucesso!</h2>
+            <p class="success-message">
+                Obrigada por nos escolher! A confirmação do pagamento junto com todas as informações
+                do seu pedido foram encaminhadas ao seu e-mail.
+            </p>
+            <a href="{{ url_for('home') }}" class="btn btn-primary">Voltar à página inicial</a>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='Script/Script_pagamento.js') }}"></script>
+
+</body>
+</html>

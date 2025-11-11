@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Karla Priscilia Confeitaria</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                
+                <img src="{{ url_for('static', filename='Imagens/logo/cake + title logo.png') }}" alt="Karla Priscilia Confeitaria">
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="{{ url_for('perfil') }}" class="nav-link active">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('home') }}" class="nav-link">
+                            <i class="fas fa-utensils"></i>
+                            <span>Cardápio</span>
+                        </a>
+                    </li>
+                     <li class="nav-item">
+                        <a href="{{ url_for('carrinho') }}" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Carrinho</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('logout') }}" class="nav-link">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Sair</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Meu Perfil</h1>
+            </div>
+
+            <div class="profile-card">
+                {% if user.picture %}
+                    <img src="{{ user.picture }}" alt="Foto de Perfil" class="profile-avatar-img">
+                {% else %}
+                    <div class="profile-avatar-fallback">
+                        {{ user.name[0] if user.name else 'U' }}
+                    </div>
+                {% endif %}
+
+                <a href="#" class="profile-edit-btn" onclick="toggleEditMode()">
+                    <i class="fas fa-pen"></i>
+                    <span>Editar perfil</span>
+                </a>
+                
+                <div class="profile-info">
+                    <div class="view-mode">
+                        <h4>{{ user.name }}</h4>
+                        <p>Email: {{ user.email }}</p>
+                        <p style="margin-top: 10px; color: var(--text-light);">
+                            CPF: {{ user.cpf if user.cpf else '(Não informado)' }}<br>
+                            Endereço: {{ user.endereco if user.endereco else '(Não informado)' }}<br>
+                            Celular: {{ user.celular if user.celular else '(Não informado)' }}
+                        </p>
+                        <small style="display:block; margin-top:15px; color: #999;">
+                            Clique em "Editar perfil" para adicionar seus dados.
+                        </small>
+                    </div>
+
+                    <div class="edit-mode" style="display: none;">
+                        <div class="form-group">
+                            <label>Nome:</label>
+                            <input type="text" class="form-control" value="{{ user.name }}">
+                        </div>
+                        <div class="form-group">
+                            <label>CPF:</label>
+                            <input type="text" class="form-control cpf-mask" placeholder="000.000.000-00" value="{{ user.cpf }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Endereço:</label>
+                            <input type="text" class="form-control" placeholder="Rua, Número, Bairro, CEP..." value="{{ user.endereco }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Celular:</label>
+                            <input type="tel" class="form-control phone-mask" placeholder="(00) 90000-0000" value="{{ user.celular }}">
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-cancel" onclick="toggleEditMode()">Cancelar</button>
+                            <button type="button" class="btn btn-save" onclick="saveProfile()">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section style="margin-top:50px;">
+                <h2 class="section-title" style="font-size:24px;font-weight:700;margin-bottom:24px;">Pedidos Feitos</h2>
+
+                {% if pedidos %}
+                    {% for p in pedidos %}
+                    <a href="#" class="order-card">
+                        <div class="order-left">
+                            <p class="order-id">Pedido #{{ loop.index }}</p>
+                            <p class="order-date">Feito dia {{ p.criado_em.strftime('%d/%m/%Y às %H:%M') if p.criado_em else '' }}</p>
+                        </div>
+                        <div class="order-right">
+                            <p class="order-pay">Pagamento: {{ p.metodo }}</p>
+                            <p class="order-status">Total: R$ {{ '%.2f'|format(p.total) }}</p>
+                        </div>
+                    </a>
+                    <ul style="margin:8px 0 20px 0;padding-left:20px;list-style:disc;color:#666;font-size:0.9rem;">
+                        {% for it in p.itens_list %}
+                            <li>{{ it.qty }}x {{ it.name }}</li>
+                        {% endfor %}
+                    </ul>
+                    </a>
+                    {% endfor %}
+                {% else %}
+                    <p style="text-align:center;color:#888;">Você ainda não realizou nenhum pedido.</p>
+                {% endif %}
+            </section>
+
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='Script/Script_perfil.js') }}"></script>
+
+</body>
+</html>
